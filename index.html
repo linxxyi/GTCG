@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星穹旅人 - 七圣召唤赛事选手主页</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2c3e8f;
+            --accent: #ff5722;
+            --light: #f5f7ff;
+            --dark: #1a1f3d;
+            --success: #4CAF50;
+            --element-pyro: #ff5722;
+            --element-hydro: #2196F3;
+            --element-cryo: #03A9F4;
+            --element-electro: #9C27B0;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://uploadstatic.mihoyo.com/ys-obc/2022/12/09/75818401/1f1a1d7c7bdc8d5d0c3f0d2b4c8d3f5c_4239346640693035195.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.08;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 40px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .player-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--element-electro), #6a11cb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--accent);
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(156, 39, 176, 0.7);
+        }
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .player-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            background: linear-gradient(to right, #ffeb3b, #ff9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(255, 152, 0, 0.3);
+        }
+        
+        .player-info .title {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: rgba(255, 87, 34, 0.2);
+            border: 1px solid var(--accent);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        /* 主内容区 */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--accent);
+        }
+        
+        /* 赛事战绩与荣耀回放模块 */
+        .tournament-timeline {
+            background: rgba(26, 31, 61, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .event-card {
+            background: linear-gradient(135deg, rgba(44, 62, 143, 0.5), rgba(26, 31, 61, 0.8));
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .event-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--element-electro);
+        }
+        
+        .trophy-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .trophy-badge img {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .trophy-badge span {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #e1b12c, #fbc531);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stats-snapshot {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-cell {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 12px 20px;
+            text-align: center;
+            min-width: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-cell.highlight {
+            background: rgba(156, 39, 176, 0.2);
+            border: 1px solid var(--element-electro);
+            box-shadow: 0 0 10px rgba(156, 39, 176, 0.3);
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #ffeb3b;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .highlight-markers {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .marker {
+            background: rgba(255, 152, 0, 0.2);
+            border: 1px solid var(--accent);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .marker:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .marker i {
+            font-size: 1.2rem;
+        }
+        
+        .video-container {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+            background: #000;
+        }
+        
+        .video-preview {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), url('https://uploadstatic.mihoyo.com/ys-obc/2022/12/09/75818401/7a1d2d9a9b5d1c6b0e8c5a9b3c1d3e4f_1411636806260259401.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .play-button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255, 87, 34, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+        
+        .play-button i {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        /* 角色展示区 */
+        .character-showcase {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .character-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            flex: 1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+        
+        .character-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .character-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .character-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #ffeb3b;
+        }
+        
+        .win-rate {
+            color: var(--success);
+            font-weight: 700;
+        }
+        
+        /* 数据看板 */
+        .stats-dashboard {
+            background: rgba(26, 31, 61, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .stat-box {
+            background: linear-gradient(135deg, rgba(44, 62, 143, 0.5), rgba(26, 31, 61, 0.8));
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .stat-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .stat-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .progress-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        
+        .pyro { background: var(--element-pyro); width: 78%; }
+        .hydro { background: var(--element-hydro); width: 65%; }
+        .cryo { background: var(--element-cryo); width: 72%; }
+        .electro { background: var(--element-electro); width: 68%; }
+        
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .character-showcase {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部区域 -->
+        <header>
+            <div class="player-card">
+                <div class="avatar">
+                    <img src="https://uploadstatic.mihoyo.com/ys-obc/2022/12/09/75818401/7a1d2d9a9b5d1c6b0e8c5a9b3c1d3e4f_1411636806260259401.jpg" alt="玩家头像">
+                </div>
+                <div class="player-info">
+                    <h1>星穹旅人</h1>
+                    <div class="title">「七圣召唤」亚服巅峰榜第3名</div>
+                    <div class="tags">
+                        <div class="tag">「往生堂」战队主力</div>
+                        <div class="tag">战术分析师</div>
+                        <div class="tag">速攻流大师</div>
+                    </div>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-bilibili"></i></a>
+                <a href="#"><i class="fab fa-twitch"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-weibo"></i></a>
+            </div>
+        </header>
+        
+        <!-- 主内容区 -->
+        <div class="main-content">
+            <!-- 左侧：赛事战绩与荣耀回放 -->
+            <div class="tournament-timeline">
+                <h2 class="section-title"><i class="fas fa-trophy"></i> 赛事战绩与荣耀回放</h2>
+                
+                <!-- 赛事卡片1 -->
+                <div class="event-card">
+                    <div class="trophy-badge">
+                        <img src="https://webstatic.mihoyo.com/ys/event/e20211215-card/title-img.8e7d1c1.png" alt="雷元素奖杯">
+                        <span>2024「寂灭之刻」冠军</span>
+                    </div>
+                    
+                    <div class="stats-snapshot">
+                        <div class="stat-cell">
+                            <div class="stat-value">78%</div>
+                            <div class="stat-label">胜率</div>
+                        </div>
+                        <div class="stat-cell highlight">
+                            <div class="stat-value">4.1</div>
+                            <div class="stat-label">场均回合</div>
+                        </div>
+                        <div class="stat-cell">
+                            <div class="stat-value">93%</div>
+                            <div class="stat-label">骰效利用率</div>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-markers">
+                        <span class="marker">
+                            <i class="fas fa-bolt"></i> 绝杀时刻 (02:18)
+                        </span>
+                        <span class="marker">
+                            <i class="fas fa-dice"></i> 神骰操作 (05:42)
+                        </span>
+                        <span class="marker">
+                            <i class="fas fa-snowflake"></i> 完美冻结 (07:15)
+                        </span>
+                    </div>
+                    
+                    <div class="video-container">
+                        <div class="video-preview">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 赛事卡片2 -->
+                <div class="event-card">
+                    <div class="trophy-badge">
+                        <img src="https://webstatic.mihoyo.com/ys/event/e20211215-card/title-img.8e7d1c1.png" alt="冰元素奖杯">
+                        <span>2023「霜寒之冠」四强</span>
+                    </div>
+                    
+                    <div class="stats-snapshot">
+                        <div class="stat-cell">
+                            <div class="stat-value">72%</div>
+                            <div class="stat-label">胜率</div>
+                        </div>
+                        <div class="stat-cell highlight">
+                            <div class="stat-value">5.3</div>
+                            <div class="stat-label">场均回合</div>
+                        </div>
+                        <div class="stat-cell">
+                            <div class="stat-value">88%</div>
+                            <div class="stat-label">骰效利用率</div>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-markers">
+                        <span class="marker">
+                            <i class="fas fa-shield-alt"></i> 极限防御 (03:45)
+                        </span>
+                        <span class="marker">
+                            <i class="fas fa-fire"></i> 元素爆发 (08:22)
+                        </span>
+                    </div>
+                    
+                    <div class="video-container">
+                        <div class="video-preview">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 角色展示 -->
+                <h3 class="section-title"><i class="fas fa-user"></i> 招牌角色</h3>
+                <div class="character-showcase">
+                    <div class="character-card">
+                        <div class="character-icon">
+                            <img src="https://upload-os-bbs.mihoyo.com/upload/2022/12/09/75818401/7a1d2d9a9b5d1c6b0e8c5a9b3c1d3e4f_1411636806260259401.jpg" alt="神里绫华">
+                        </div>
+                        <div class="character-name">神里绫华</div>
+                        <div class="win-rate">胜率 82%</div>
+                        <div class="character-desc">冻结核心</div>
+                    </div>
+                    <div class="character-card">
+                        <div class="character-icon">
+                            <img src="https://upload-os-bbs.mihoyo.com/upload/2022/12/09/75818401/7a1d2d9a9b5d1c6b0e8c5a9b3c1d3e4f_1411636806260259401.jpg" alt="宵宫">
+                        </div>
+                        <div class="character-name">宵宫</div>
+                        <div class="win-rate">胜率 76%</div>
+                        <div class="character-desc">速攻核心</div>
+                    </div>
+                    <div class="character-card">
+                        <div class="character-icon">
+                            <img src="https://upload-os-bbs.mihoyo.com/upload/2022/12/09/75818401/7a1d2d9a9b5d1c6b0e8c5a9b3c1d3e4f_1411636806260259401.jpg" alt="刻晴">
+                        </div>
+                        <div class="character-name">刻晴</div>
+                        <div class="win-rate">胜率 68%</div>
+                        <div class="character-desc">爆发输出</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧：数据看板 -->
+            <div class="stats-dashboard">
+                <h2 class="section-title"><i class="fas fa-chart-bar"></i> 赛事数据看板</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-header">
+                            <div class="stat-title">总体数据</div>
+                            <i class="fas fa-globe-asia"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-item">
+                                <div class="stat-value">72.3%</div>
+                                <div class="stat-label">总胜率</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">68.1%</div>
+                                <div class="stat-label">先手胜率</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">76.9%</div>
+                                <div class="stat-label">后手胜率</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">4.2</div>
+                                <div class="stat-label">平均回合</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-box">
+                        <div class="stat-header">
+                            <div class="stat-title">元素使用率</div>
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>火元素</span>
+                                    <span>78%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill pyro"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>水元素</span>
+                                    <span>65%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill hydro"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>冰元素</span>
+                                    <span>72%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill cryo"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>雷元素</span>
+                                    <span>68%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill electro"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-box">
+                        <div class="stat-header">
+                            <div class="stat-title">卡组胜率</div>
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>宵宫速攻流</span>
+                                    <span>84%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="background: var(--element-pyro); width: 84%;"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>神里冻结流</span>
+                                    <span>78%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="background: var(--element-cryo); width: 78%;"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>刻晴激化流</span>
+                                    <span>72%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="background: var(--element-electro); width: 72%;"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>双岩共鸣</span>
+                                    <span>65%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="background: #795548; width: 65%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-box">
+                        <div class="stat-header">
+                            <div class="stat-title">近期赛事</div>
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="event-item">
+                                <div class="event-date">2025-07-12</div>
+                                <div class="event-name">须弥大师赛</div>
+                                <div class="event-status">小组赛</div>
+                            </div>
+                            <div class="event-item">
+                                <div class="event-date">2025-08-03</div>
+                                <div class="event-name">稻妻邀请赛</div>
+                                <div class="event-status">已报名</div>
+                            </div>
+                            <div class="event-item">
+                                <div class="event-date">2025-06-20</div>
+                                <div class="event-name">璃月月赛</div>
+                                <div class="event-status">冠军</div>
+                            </div>
+                            <div class="event-item">
+                                <div class="event-date">2025-05-15</div>
+                                <div class="event-name">蒙德友谊赛</div>
+                                <div class="event-status">四强</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <footer>
+            <p>© 2025 星穹旅人 - 七圣召唤赛事选手主页 | 本网站为粉丝创作，与米哈游官方无关</p>
+            <p>数据更新于：2025-06-06</p>
+        </footer>
+    </div>
+    
+    <script>
+        // 模拟视频播放功能
+        document.querySelectorAll('.play-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const eventCard = this.closest('.event-card');
+                const markers = eventCard.querySelectorAll('.marker');
+                
+                // 添加视觉反馈
+                this.innerHTML = '<i class="fas fa-pause"></i>';
+                this.style.background = '#4CAF50';
+                
+                // 高亮标记
+                markers.forEach(marker => {
+                    marker.style.background = 'rgba(255, 152, 0, 0.3)';
+                    
+                    marker.addEventListener('click', function() {
+                        markers.forEach(m => m.style.background = 'rgba(255, 152, 0, 0.2)');
+                        this.style.background = 'var(--accent)';
+                        
+                        // 添加特效
+                        this.style.boxShadow = '0 0 15px rgba(255, 152, 0, 0.8)';
+                        setTimeout(() => {
+                            this.style.boxShadow = 'none';
+                        }, 1000);
+                    });
+                });
+                
+                // 提示用户
+                alert('在实际应用中，这里会播放赛事回放视频。标记点可跳转到特定精彩时刻！');
+            });
+        });
+        
+        // 标记点悬停效果
+        document.querySelectorAll('.marker').forEach(marker => {
+            marker.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px)';
+                this.style.boxShadow = '0 5px 15px rgba(255, 152, 0, 0.4)';
+            });
+            
+            marker.addEventListener('mouseleave', function() {
+                this.style.transform = 'none';
+                this.style.boxShadow = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
