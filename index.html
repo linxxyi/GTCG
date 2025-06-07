@@ -109,13 +109,13 @@
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--element-electro), #6a11cb);
+            background: linear-gradient(135deg, var(--element-electro), #fcf9ff);
             display: flex;
             align-items: center;
             justify-content: center;
             border: 3px solid var(--accent);
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(156, 39, 176, 0.8);
+            box-shadow: 0 0 30px rgba(172, 74, 175, 0.8);
             position: relative;
             z-index: 10;
             animation: float 6s ease-in-out infinite;
@@ -431,7 +431,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             margin-top: 40px;
         }
         
@@ -444,15 +444,17 @@
             height: 100%;
             background: radial-gradient(circle at bottom left, rgba(255, 87, 34, 0.2), transparent 70%);
             z-index: -1;
+            
         }
         
         .deck-container {
             perspective: 1500px;
-            height: 350px;
+            min-height: 500px;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
+            overflow: visible;
         }
         
         .deck {
@@ -770,7 +772,7 @@
         <header class="neon-border animate-fade">
             <div class="player-card">
                 <div class="avatar">
-                    <img src="https://upload-os-bbs.mihoyo.com/upload/2022/12/09/75818401/7a1d2d9a9b5d1c6b0e8c5a9b3c1d3e4f_1411636806260259401.jpg" alt="玩家头像">
+                    <img src="https://act-webstatic.mihoyo.com/hk4e/e20200928calculate/item_icon/67c7f6c8/d1a8230a8d5d380442586e31f61e3b80.png" alt="玩家头像">
                 </div>
                 <div class="player-info">
                     <h1>Haku</h1>
@@ -799,7 +801,7 @@
                 <!-- 赛事卡片1 -->
                 <div class="event-card">
                     <div class="trophy-badge">
-                        <img src="https://webstatic.mihoyo.com/ys/event/e20211215-card/title-img.8e7d1c1.png" alt="雷元素奖杯">
+                        <img src="https://psnobj.prod.dl.playstation.net/psnobj/NPWR22724_00/3858fc7b-036f-4edb-a96a-c4209359d40c.PNG">
                         <span>第十一届「流星杯」冠军</span>
                     </div>
                     
@@ -820,29 +822,32 @@
                     
                     <div class="highlight-markers">
                         <span class="marker">
-                            <i class="fas fa-bolt"></i> 绝杀时刻 (02:18)
+                            <i class="fas fa-bolt"></i> 绝杀时刻 (12:18)
                         </span>
                         <span class="marker">
-                            <i class="fas fa-dice"></i> 神骰操作 (05:42)
+                            <i class="fas fa-dice"></i> 神骰操作 (25:42)
                         </span>
                         <span class="marker">
-                            <i class="fas fa-snowflake"></i> 完美冻结 (07:15)
+                            <i class="fas fa-snowflake"></i> 完美冻结 (37:15)
                         </span>
                     </div>
                     
                     <div class="video-container">
-                        <div class="video-preview">
+                        <a href="https://www.bilibili.com/video/BV18foJYWEKA" target="_blank" style="display: block; width: 100%; height: 100%;">
+                          <div class="video-preview">
                             <div class="play-button">
-                                <i class="fas fa-play"></i>
+                              <i class="fas fa-play"></i>
                             </div>
-                        </div>
+                          </div>
+                        </a>
                     </div>
+                      
                 </div>
                 
                 <!-- 赛事卡片2 -->
                 <div class="event-card">
                     <div class="trophy-badge">
-                        <img src="https://webstatic.mihoyo.com/ys/event/e20211215-card/title-img.8e7d1c1.png" alt="冰元素奖杯">
+                        <img src="https://psnobj.prod.dl.playstation.net/psnobj/NPWR22724_00/3858fc7b-036f-4edb-a96a-c4209359d40c.PNG">
                         <span>4.2「共鸣杯」8强</span>
                     </div>
                     
@@ -863,20 +868,22 @@
                     
                     <div class="highlight-markers">
                         <span class="marker">
-                            <i class="fas fa-shield-alt"></i> 极限防御 (03:45)
+                            <i class="fas fa-shield-alt"></i> 极限防御 (12:45)
                         </span>
                         <span class="marker">
-                            <i class="fas fa-fire"></i> 元素爆发 (08:22)
+                            <i class="fas fa-fire"></i> 元素爆发 (28:22)
                         </span>
                     </div>
                     
                     <div class="video-container">
-                        <div class="video-preview">
+                        <a href="https://www.bilibili.com/video/BV1Hj411j7Fv" target="_blank" style="display: block; width: 100%; height: 100%;">
+                          <div class="video-preview">
                             <div class="play-button">
-                                <i class="fas fa-play"></i>
+                              <i class="fas fa-play"></i>
                             </div>
-                        </div>
-                    </div>
+                          </div>
+                        </a>
+                      </div>                      
                 </div>
             </div>
             
@@ -931,7 +938,7 @@
                                     <span>65%</span>
                                 </div>
                                 <div class="progress-bar">
-                                    <div class="progress-fill hydro" style="width: 65%"></div>
+                                    <div class="progress-fill electro" style="width: 65%"></div>
                                 </div>
                             </div>
                             <div class="progress-item">
@@ -991,24 +998,24 @@
                         </div>
                         <div class="stat-content">
                             <div class="event-item">
-                                <div class="event-date">2025-07-12</div>
-                                <div class="event-name">须弥大师赛</div>
-                                <div class="event-status">小组赛</div>
+                                <div class="event-date">2025-07-25</div>
+                                <div class="event-name">流星杯第二赛季线下总决赛</div>
+                                <div class="event-status">已入围</div>
                             </div>
                             <div class="event-item">
                                 <div class="event-date">2025-08-03</div>
-                                <div class="event-name">稻妻邀请赛</div>
-                                <div class="event-status">已报名</div>
+                                <div class="event-name">2025枫达杯</div>
+                                <div class="event-status">已入围</div>
                             </div>
                             <div class="event-item">
-                                <div class="event-date">2025-06-20</div>
-                                <div class="event-name">璃月月赛</div>
+                                <div class="event-date">2025-05-17</div>
+                                <div class="event-name">第十一届「流星杯」</div>
                                 <div class="event-status">冠军</div>
                             </div>
                             <div class="event-item">
-                                <div class="event-date">2025-05-15</div>
-                                <div class="event-name">蒙德友谊赛</div>
-                                <div class="event-status">四强</div>
+                                <div class="event-date">2025-05-08</div>
+                                <div class="event-name">逐星辉聚「月话杯」</div>
+                                <div class="event-status">二十四强</div>
                             </div>
                         </div>
                     </div>
@@ -1032,21 +1039,21 @@
                         </div>
                         <div class="card-body">
                             <div class="card-image">
-                                <img src="https://webstatic.mihoyo.com/upload/contentweb/2023/04/13/2b1a9f0a5e0c5f9a1f1a2b3c4d5e6f7_5237785573856645603.jpg" alt="宵宫">
+                                <img src="https://act-webstatic.mihoyo.com/hk4e/e20200928calculate/item_icon/67c7f6fc/e14390eb237b4e850693c9a33586f571.png?x-oss-process=image/resize,w_340/crop,h_340/quality,q_90" alt="若陀龙王">
                             </div>
                             <div class="card-stats">
                                 <div class="stat">
-                                    <div class="stat-value">3</div>
+                                    <div class="stat-value">10</div>
                                     <div class="stat-label">生命值</div>
                                 </div>
                                 <div class="stat">
                                     <div class="stat-value">2</div>
-                                    <div class="stat-label">骰子</div>
+                                    <div class="stat-label">充能</div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            速攻核心 · 普通攻击造成2点火元素伤害
+                            
                         </div>
                     </div>
                     
@@ -1058,21 +1065,21 @@
                         </div>
                         <div class="card-body">
                             <div class="card-image">
-                                <img src="https://webstatic.mihoyo.com/upload/contentweb/2023/04/13/2b1a9f0a5e0c5f9a1f1a2b3c4d5e6f7_5237785573856645603.jpg" alt="祭礼弓">
+                                <img src="https://act-webstatic.mihoyo.com/hk4e/e20200928calculate/item_icon/67c7f6fc/cbc3dd73806ddc6ffda202a228975df7.png?x-oss-process=image/resize,w_340/crop,h_340/quality,q_90" alt="克洛琳德">
                             </div>
                             <div class="card-stats">
                                 <div class="stat">
-                                    <div class="stat-value">+1</div>
-                                    <div class="stat-label">伤害</div>
+                                    <div class="stat-value">10</div>
+                                    <div class="stat-label">生命值</div>
                                 </div>
                                 <div class="stat">
-                                    <div class="stat-value">3</div>
-                                    <div class="stat-label">骰子</div>
+                                    <div class="stat-value">2</div>
+                                    <div class="stat-label">充能</div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            装备后普通攻击额外造成1点伤害
+                         
                         </div>
                     </div>
                     
@@ -1084,21 +1091,21 @@
                         </div>
                         <div class="card-body">
                             <div class="card-image">
-                                <img src="https://webstatic.mihoyo.com/upload/contentweb/2023/04/13/2b1a9f0a5e0c5f9a1f1a2b3c4d5e6f7_5237785573856645603.jpg" alt="运筹帷幄">
+                                <img src="https://act-webstatic.mihoyo.com/hk4e/e20200928calculate/item_icon/67c7f6fc/eaa37024fee4578c89eeffe6528e77cf.png?x-oss-process=image/resize,w_340/crop,h_340/quality,q_90" alt="莱伊拉">
                             </div>
                             <div class="card-stats">
                                 <div class="stat">
-                                    <div class="stat-value">2</div>
-                                    <div class="stat-label">骰子</div>
+                                    <div class="stat-value">10</div>
+                                    <div class="stat-label">生命值</div>
                                 </div>
                                 <div class="stat">
                                     <div class="stat-value">2</div>
-                                    <div class="stat-label">抽卡</div>
+                                    <div class="stat-label">充能</div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            抽2张牌 · 本回合骰子数量+1
+                            
                         </div>
                     </div>
                 </div>
